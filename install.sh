@@ -34,29 +34,27 @@ fi
 if inquire "🍺 Do you want to install Homebrew (y/n)?"; then
   echo "🍺 Installing homebrew..."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  brew --version
   brew update
+
+  echo "🍺 Installing homebrew cask"
+  brew install caskroom/cask/brew-cask
+
+  echo "🍺 Homebrew tap caskroom/fonts..."
+  brew tap caskroom/fonts
+
+  echo "🍺 Homebrew tap caskroom/versions..."
+  brew tap caskroom/versions
+
+  echo "🍺 Homebrew tap homebrew/cask-versions..."
+  brew tap homebrew/cask-versions
+
+  echo "🍺 Homebrew tap clojure/tools..."
+  brew tap clojure/tools
+
+  brew --version
 else
   echo "⏩ Skipping installation of Homebrew..."
 fi
-
-echo "🍺 Installing homebrew cask"
-brew install caskroom/cask/brew-cask
-
-echo "🍺 Homebrew tap caskroom/fonts..."
-brew tap caskroom/fonts
-
-echo "🍺 Homebrew tap caskroom/versions..."
-brew tap caskroom/versions
-
-echo "🍺 Homebrew tap homebrew/cask-versions..."
-brew tap homebrew/cask-versions
-
-echo "🍺 Homebrew tap clojure/tools..."
-brew tap clojure/tools
-
-echo "🍺 Updating..."
-brew update
 
 echo "🦊 Installing Mozilla Firefox..."
 brew install --cask firefox
