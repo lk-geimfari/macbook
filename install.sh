@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-echo "⚙️ Starting ..."
-sleep 1
+echo "⚙️ Starting for $USER."; sleep .1;
 
 read -p "👤 Please, enter your name: " AUTHOR
 read -p "📧 Please, enter your email: " EMAIL
@@ -18,25 +17,21 @@ inquire() {
 }
 
 if inquire "🔑 Do you want to generate SSH keys (y/n)?"; then
-  read -p "Please, specify the type of key (rsa or ecdsa): " SSH_KEY_TYPE
+  read -p "Please, specify the type of key (RSA or ECDSA): " SSH_KEY_TYPE
 
-  if [ "$SSH_KEY_TYPE" = "rsa" ]; then
-    if test -f "~/.ssh/id_rsa"; then
-      echo "🔑 Generating SSH keys (RSA)..."
-      ssh-keygen -t rsa -b 4096 -C "${EMAIL}" -f ~/.ssh/id_rsa
-    else
-      echo "❌ RSA key already exists."
-    fi
-  fi
-
-  if [ "$SSH_KEY_TYPE" = "ecdsa" ]; then
-    if test -f "~/.ssh/id_ecdsa"; then
-      echo "🔑 Generating SSH keys (ECDSA)..."
-      ssh-keygen -t ecdsa -b 521 -C "${EMAIL}" -f ~/.ssh/id_ecdsa
-    else
-      echo "❌ ECDSA key already exists."
-    fi
-  fi
+  case $SSH_KEY_TYPE in
+  rsa | RSA)
+    echo "🔑 Generating SSH keys (RSA)..."
+    ssh-keygen -t rsa -b 4096 -C "${EMAIL}" -f ~/.ssh/id_rsa
+    ;;
+  ec | ecdsa | ECDSA)
+    echo "🔑 Generating SSH keys (ECDSA)..."
+    ssh-keygen -t ecdsa -b 521 -C "${EMAIL}" -f ~/.ssh/id_ecdsa
+    ;;
+  *)
+    echo "Unknown key type. Skipping generation of keys..."
+    ;;
+  esac
 else
   echo "⏩ Skipping generation of SSH keys..."
 fi
