@@ -17,7 +17,7 @@ inquire() {
 }
 
 if inquire "🔑 Do you want to generate SSH keys (y/n)?"; then
-  read -p "Please, specify the type of key (RSA or ECDSA): " SSH_KEY_TYPE
+  read -p "Please, specify the type of key (RSA, ECDSA or ED25519): " SSH_KEY_TYPE
 
   case $SSH_KEY_TYPE in
   1 | rsa | RSA)
@@ -28,6 +28,10 @@ if inquire "🔑 Do you want to generate SSH keys (y/n)?"; then
     echo "🔑 Generating SSH keys (ECDSA)..."
     ssh-keygen -t ecdsa -b 521 -C "${EMAIL}" -f ~/.ssh/id_ecdsa
     ;;
+  3 | ed | ed25519 | ED25519)
+    echo "🔑 Generating SSH keys (ED25519)..."
+    ssh-keygen -o -a 256 -t ed25519 -C "${EMAIL}" -f ~/.ssh/id_ed25519
+  ;;
   *)
     echo "Unknown key type. Skipping generation of keys..."
     ;;
