@@ -156,32 +156,32 @@ fi
 
 if inquire "❤️ Do you want to install the GNU software collection? (y/n)?"; then
   # See: https://www.gnu.org/software/coreutils/
-  if inquire "🔴 Do you want to install GNU coreutils (y/n)?"; then
-    echo "🔴 Installing GNU coreutils..."
+  if inquire "⚙️ Do you want to install GNU coreutils (y/n)?"; then
+    echo "⚙️ Installing GNU coreutils..."
     brew install --force-bottle coreutils
   else
     echo "⏩ Skipping installation of GNU coreutils..."
   fi
 
   # See: https://www.gnu.org/software/diffutils/
-  if inquire "🟠 Do you want to install GNU diffutils (y/n)?"; then
-    echo "🟠 Installing GNU diffutils..."
+  if inquire "⚙️ Do you want to install GNU diffutils (y/n)?"; then
+    echo "⚙️ Installing GNU diffutils..."
     brew install --force-bottle diffutils
   else
     echo "⏩ Skipping installation of GNU diffutils..."
   fi
 
   # See: https://savannah.gnu.org/projects/which/
-  if inquire "🟡 Do you want to install GNU which (y/n)?"; then
-    echo "🟡 Installing GNU which..."
+  if inquire "⚙️ Do you want to install GNU which (y/n)?"; then
+    echo "⚙️ Installing GNU which..."
     brew install gnu-which --with-default-names
   else
     echo "⏩ Skipping installation of GNU which..."
   fi
 
   # See: https://www.gnu.org/software/sed/
-  if inquire "🟢 Do you want to install GNU sed (y/n)?"; then
-    echo "🟢 Installing GNU sed..."
+  if inquire "⚙️ Do you want to install GNU sed (y/n)?"; then
+    echo "⚙️ Installing GNU sed..."
     brew install gnu-sed --with-default-names
   else
     echo "⏩ Skipping installation of GNU sed..."
@@ -196,8 +196,8 @@ if inquire "❤️ Do you want to install the GNU software collection? (y/n)?"; 
   fi
 
   # See: https://www.gnu.org/software/indent/
-  if inquire "🟣 Do you want to install GNU Indent (y/n)?"; then
-    echo "🟣 Installing GNU Indent..."
+  if inquire "⚙️ Do you want to install GNU Indent (y/n)?"; then
+    echo "⚙️ Installing GNU Indent..."
     brew install gnu-indent
   else
     echo "⏩ Skipping installation of GNU indent..."
@@ -293,18 +293,18 @@ if inquire "🛡 Do you want to install privacy and security software (y/n)?"; t
     echo "🔒 Installing GPG Suite..."
     brew install --cask gpg-suite
   fi
-  if inquire "🔑 Do you want to install OpenSSH (y/n)?"; then
+  if inquire "⚙️ Do you want to install OpenSSH (y/n)?"; then
     brew install openssh
   fi
-  if inquire "🔑 Do you want to install OpenSSL (y/n)?"; then
+  if inquire "⚙️ Do you want to install OpenSSL (y/n)?"; then
     brew install openssl
   fi
   if inquire "⚙️ Do you want to install 1Password (y/n)?"; then
     echo "⚙️ Installing 1Password..."
     brew install --cask 1password
   fi
-  if inquire "🟥 Do you want to install Authy (y/n)?"; then
-    echo "🟥 Installing Authy..."
+  if inquire "⚙️ Do you want to install Authy (y/n)?"; then
+    echo "⚙️ Installing Authy..."
     brew install --cask authy
   fi
   if inquire "🐻 Do you want to install TunnelBear (y/n)?"; then
@@ -323,22 +323,22 @@ if inquire "🛠 Do you want to install JetBrain's IDEs (y/n)?"; then
   echo "⚙️ Installing JetBrains Toolbox..."
   brew install --cask jetbrains-toolbox
 
-  if inquire "Do you want to install PyCharm (y/n)?"; then
+  if inquire "🛠 Do you want to install PyCharm (y/n)?"; then
     echo "⚙️ Installing PyCharm Professional..."
     brew install --cask pycharm
   fi
 
-  if inquire "Do you want to install WebStorm (y/n)?"; then
+  if inquire "🛠 Do you want to install WebStorm (y/n)?"; then
     echo "⚙️ Installing WebStorm..."
     brew install --cask webstorm
   fi
 
-  if inquire "Do you want to install DataGrip (y/n)?"; then
+  if inquire "🛠 Do you want to install DataGrip (y/n)?"; then
     echo "⚙️ Installing DataGrip..."
     brew install --cask datagrip
   fi
 
-  if inquire "Do you want to IntelliJ IDEA Ultimate (y/n)?"; then
+  if inquire "🛠 Do you want to IntelliJ IDEA Ultimate (y/n)?"; then
     echo "⚙️ Installing IntelliJ IDEA Ultimate..."
     brew install --cask intellij-idea
   fi
