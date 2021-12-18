@@ -1,0 +1,15 @@
+sudo: false
+
+os:
+- osx
+
+before_install:
+  - chmod +x install.sh
+
+script:
+- ./install.sh
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
