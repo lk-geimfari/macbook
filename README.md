@@ -1,4 +1,4 @@
-# Macbook
+# Macbook: Development Environment Quickly
 
 <p align="center">
   <a target="_blank" href="https://github.com/lk-geimfari/macbook">
@@ -7,7 +7,6 @@
 </p>
 
 A script to automatically setting up new Macbook for development.
-
 
 
 ## Installation
