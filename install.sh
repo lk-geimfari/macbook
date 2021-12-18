@@ -447,6 +447,34 @@ defaults write com.apple.Safari SuppressSearchSuggestions -bool true
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles -bool false
 
+# Privacy: don’t send search queries to Apple
+defaults write com.apple.Safari UniversalSearchEnabled -bool false
+defaults write com.apple.Safari SuppressSearchSuggestions -bool true
+
+# Show the full URL in the address bar (note: this still hides the scheme)
+defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
+
+# Set Safari’s home page to `about:blank` for faster loading
+defaults write com.apple.Safari HomePage -string "about:blank"
+
+# Disable Safari’s thumbnail cache for History and Top Sites
+defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
+
+# Enable Safari’s debug menu
+defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+
+# Disable AutoFill
+defaults write com.apple.Safari AutoFillFromAddressBook -bool false
+defaults write com.apple.Safari AutoFillPasswords -bool false
+defaults write com.apple.Safari AutoFillCreditCardData -bool false
+defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false
+
+# Enable “Do Not Track”
+defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
+
+# Update extensions automatically
+defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
+
 # Disable autocorrect:
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
@@ -455,6 +483,99 @@ defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
 
 # Notification dismiss timeout:
 defaults write com.apple.notificationcenterui bannerTime -int 4
+
+# Automatically download apps purchased on other Macs
+defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1
+
+# Turn on app auto-update
+defaults write com.apple.commerce AutoUpdate -bool true
+
+# Automatically download apps purchased on other Macs
+defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1
+
+# Download newly available updates in background
+defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
+
+# Auto-play videos when opened with QuickTime Player
+defaults write com.apple.QuickTimePlayerX MGPlayMovieOnOpen -bool true
+
+# Sort Activity Monitor results by CPU usage
+defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
+defaults write com.apple.ActivityMonitor SortDirection -int 0
+
+# Show all processes in Activity Monitor
+defaults write com.apple.ActivityMonitor ShowCategory -int 0
+
+# Prevent Time Machine from prompting to use new hard drives as backup volume
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+# Don’t display the annoying prompt when quitting iTerm
+defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+
+# Only use UTF-8 in Terminal.app
+defaults write com.apple.terminal StringEncodings -array 4
+
+# Don’t show recent applications in Dock
+defaults write com.apple.dock show-recents -bool false
+
+# Speed up Mission Control animations
+defaults write com.apple.dock expose-animation-duration -float 0.1
+
+# Show indicator lights for open applications in the Dock
+defaults write com.apple.dock show-process-indicators -bool true
+
+# Minimize windows into their application’s icon
+defaults write com.apple.dock minimize-to-application -bool true
+
+# Show the ~/Library folder
+#chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
+
+# Disable the warning before emptying the Trash
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+# Avoid creating .DS_Store files on network or USB volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+# Disable the warning when changing a file extension
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# When performing a search, search the current folder by default
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+
+# Keep folders on top when sorting by name
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
+
+# Display full POSIX path as Finder window title
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+# Finder: show all filename extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Show icons for hard drives, servers, and removable media on the desktop
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+
+# Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
+defaults write com.apple.screencapture type -string "png"
+
+# Require password immediately after sleep or screen saver begins
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+# Save screenshots to the desktop
+defaults write com.apple.screencapture location -string "${HOME}/Desktop"
+
+# Sleep the display after 15 minutes
+sudo pmset -a displaysleep 15
+
+# Disable machine sleep while charging
+sudo pmset -c sleep 0
+
+# Set machine sleep to 5 minutes on battery
+sudo pmset -b sleep 5
 
 killall Finder
 killall Dock
