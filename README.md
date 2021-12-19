@@ -7,7 +7,7 @@
   </a>
 </p>
 
-A script for automatically setting up a development environment on the new Macbook. The script installs programming languages, IDEs, GNU software collections, and so on.
+A script for quickly setting up a development environment on the new Macbook. The script installs programming languages, IDEs, GNU software collections, and so on.
 
 
 ## Installation
