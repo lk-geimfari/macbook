@@ -428,19 +428,20 @@ brew cleanup
 
 success "💻 Changing macOS's settings..."
 
-# Change screenshots location
-mkdir /Users/likid_geimfari/Pictures/Screenshots
-defaults write com.apple.screencapture location /Users/likid_geimfari/Pictures/Screenshots
+# Sleep the display after 15 minutes
+sudo pmset -a displaysleep 10
 
-# Disable fucking shit I fucking hate.
+# Disable machine sleep while charging
+sudo pmset -c sleep 0
+
+# Set machine sleep to 5 minutes on battery
+sudo pmset -b sleep 5
+
+# Disable shit I hate.
 defaults write com.apple.dashboard mcx-disabled -boolean YES
 
 # This line deactivates rubber scrolling:
-# http://osxdaily.com/2012/05/10/disable-elastic-rubber-band-scrolling-in-mac-os-x/
 defaults write -g NSScrollViewRubberbanding -int 0
-
-# Disable startup noise:
-sudo nvram SystemAudioVolume=%01
 
 # Scrollbars visible when scrolling:
 defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
@@ -448,29 +449,17 @@ defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 # Maximize windows on double clicking them:
 defaults write -g AppleActionOnDoubleClick 'Maximize'
 
+# Require password immediately after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
-# Keep folders on top when sorting by name:
-defaults write com.apple.finder _FXSortFoldersFirst -bool true
-
-# Show Finder path bar:
-defaults write com.apple.finder ShowPathbar -bool true
-
-# Avoid creating .DS_Store files on network volumes
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-
-# Privacy: don’t send search queries to Apple
+# Don’t send search queries to Apple
 defaults write com.apple.Safari UniversalSearchEnabled -bool false
 defaults write com.apple.Safari SuppressSearchSuggestions -bool true
 
-# Improve Safari security
+# Improve security
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles -bool false
-
-# Privacy: don’t send search queries to Apple
-defaults write com.apple.Safari UniversalSearchEnabled -bool false
-defaults write com.apple.Safari SuppressSearchSuggestions -bool true
 
 # Show the full URL in the address bar (note: this still hides the scheme)
 defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
@@ -496,6 +485,9 @@ defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
 # Update extensions automatically
 defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
 
+# Show Finder path bar:
+defaults write com.apple.finder ShowPathbar -bool true
+
 # Disable autocorrect:
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
@@ -504,9 +496,6 @@ defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
 
 # Notification dismiss timeout:
 defaults write com.apple.notificationcenterui bannerTime -int 4
-
-# Automatically download apps purchased on other Macs
-defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1
 
 # Turn on app auto-update
 defaults write com.apple.commerce AutoUpdate -bool true
@@ -549,14 +538,14 @@ defaults write com.apple.dock show-process-indicators -bool true
 defaults write com.apple.dock minimize-to-application -bool true
 
 # Show the ~/Library folder
-#chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
+chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
 
 # Disable the warning before emptying the Trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
 # Avoid creating .DS_Store files on network or USB volumes
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
 # Disable the warning when changing a file extension
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
@@ -570,33 +559,20 @@ defaults write com.apple.finder _FXSortFoldersFirst -bool true
 # Display full POSIX path as Finder window title
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
-# Finder: show all filename extensions
+# Show all filename extensions in Finder
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
-# Show icons for hard drives, servers, and removable media on the desktop
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
-defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
-
-# Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
+# Save screenshots in PNG format
 defaults write com.apple.screencapture type -string "png"
-
-# Require password immediately after sleep or screen saver begins
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Save screenshots to the desktop
 defaults write com.apple.screencapture location -string "${HOME}/Desktop"
 
-# Sleep the display after 15 minutes
-sudo pmset -a displaysleep 15
-
-# Disable machine sleep while charging
-sudo pmset -c sleep 0
-
-# Set machine sleep to 5 minutes on battery
-sudo pmset -b sleep 5
+# Show icons for hard drives, servers, and removable media on the desktop
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 
 killall Finder
 killall Dock
