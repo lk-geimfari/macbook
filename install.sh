@@ -114,6 +114,9 @@ brew install --cask sourcetree
 success "⚙️ Installing Bartender"
 brew install --cask bartender
 
+success "⚙️ Installing TopNotch"
+brew install --cask topnotch
+
 success "⚙️ Installing Bartender"
 brew install --cask appcleaner
 
