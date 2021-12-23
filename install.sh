@@ -90,7 +90,7 @@ fi
 success "🦊 Installing Mozilla Firefox..."
 brew install --cask firefox
 
-success "🦁 Installing Mozilla Brave Browser..."
+success "🦁 Installing Brave Browser..."
 brew install --cask brave-browser
 
 success "💻 Installing iTerm2..."
