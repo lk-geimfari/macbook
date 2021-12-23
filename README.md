@@ -32,6 +32,8 @@ which is shortened version of:
 bash <(curl https://raw.githubusercontent.com/lk-geimfari/macbook/exec/install.sh -sSf)
 ```
 
+`exec` is a stable branch which means it can be outdated.
+
 ## License
 
 Mimesis is licensed under the MIT License. See [LICENSE](LICENSE) for more information.
