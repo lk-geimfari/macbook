@@ -87,65 +87,90 @@ else
   warning "⏩  Skipping installation of Homebrew..."
 fi
 
-success "🦊 Installing Mozilla Firefox..."
-brew install --cask firefox
+if inquire "🍺 Do you want to install productivity apps (y/n)?"; then
+  if inquire "🍺 Do you want to install browsers (y/n)?"; then
+    if inquire "⚙️ Do you want to install Mozilla Firefox (y/n)?"; then
+      success "🦊 Installing Mozilla Firefox..."
+      brew install --cask firefox
+    fi
 
-success "🦁 Installing Mozilla Brave Browser..."
-brew install --cask brave-browser
+    if inquire "⚙️ Do you want to install Brave Browser (y/n)?"; then
+      success "🦁 Installing Mozilla Brave Browser..."
+      brew install --cask brave-browser
+    fi
+  else
+    warning "⏩  Skipping installation of browsers..."
+  fi
 
-success "💻 Installing iTerm2..."
-brew install --cask iterm2
+  if inquire "Does your Macbook has notch? (y/n)?"; then
+    if inquire "Do you want to install TopNotch and Bartender? (y/n)?"; then
+      success "⚙️ Installing Bartender"
+      brew install --cask bartender
 
-success "💻 Installing Open In Terminal"
-brew install --cask openinterminal
+      success "⚙️ Installing TopNotch"
+      brew install --cask topnotch
+    fi
+  fi
 
-success "📚 Installing Dash..."
-brew install --cask dash
+  if inquire "Do you want to install communication apps (y/n)?"; then
+    success "⚙️ Installing Slack..."
+    brew install --cask slack
 
-success "☁️ Installing Dropbox..."
-brew install --cask dropbox
+    success "⚙️ Installing Telegram..."
+    brew install --cask telegram-desktop
 
-success "⚙️ Installing Slack..."
-brew install --cask slack
+    success "⚙️ Installing Zoom..."
+    brew install --cask zoom
 
-success "🌳 Installing Sourcetree"
-brew install --cask sourcetree
+    success "⚙️ Installing Discord..."
+    brew install --cask discord
+  fi
+fi
 
-success "⚙️ Installing Bartender"
-brew install --cask bartender
+if inquire "Do you want to install iTerm2 (y/n)?"; then
+  success "💻 Installing iTerm2..."
+  brew install --cask iterm2
 
-success "⚙️ Installing TopNotch"
-brew install --cask topnotch
+  success "💻 Installing Open In Terminal"
+  brew install --cask openinterminal
+fi
 
-success "⚙️ Installing Bartender"
-brew install --cask appcleaner
+if inquire "Do you want to install utils (y/n)?"; then
+  success "☁️ Installing Dropbox..."
+  brew install --cask dropbox
 
-success "⚙️ Installing Visual Studio Code..."
-brew install --cask visual-studio-code
+  success "⚙️ Installing Bartender"
+  brew install --cask appcleaner
 
-success "⚙️ Installing Telegram..."
-brew install --cask telegram-desktop
+  success "⚙️ Installing VLC..."
+  brew install --cask vlc
 
-success "⚙️ Installing Zoom..."
-brew install --cask zoom
+  success "🦆 Installing Cyberduck..."
+  brew install --cask cyberduck
 
-success "⚙️ Installing Discord..."
-brew install --cask discord
+  success "⚙️ Installing Spotify..."
+  brew install --cask spotify
+fi
 
-success "⚙️ Installing Spotify..."
-brew install --cask spotify
+if inquire "Do you want to install VirtualBox (y/n)?"; then
+  success "📦 Installing VirtualBox..."
+  brew install --cask virtualbox
+fi
 
-success "⚙️ Installing VLC..."
-brew install --cask vlc
+if inquire "Do you want to install Dash (y/n)?"; then
+  success "📚 Installing Dash..."
+  brew install --cask dash
+fi
 
-success "🦆 Installing Cyberduck..."
-brew install --cask cyberduck
+if inquire "Do you want to install Visual Studio Code (y/n)?"; then
+  success "⚙️ Installing Visual Studio Code..."
+  brew install --cask visual-studio-code
+fi
 
-success "Installing DB Browser for SQLite"
-brew install --cask db-browser-for-sqlite
-
-success "📦 Installing VirtualBox..."
-brew install --cask virtualbox
+if inquire "Do you want to install DB management tools (y/n)?"; then
+  success "Installing DB Browser for SQLite"
+  brew install --cask db-browser-for-sqlite
+fi
 
 if inquire "Do you want to install Ganache (y/n)?"; then
   success "⚙️ Installing Ganache..."
@@ -154,13 +179,15 @@ else
   warning "⏩  Skipping installation of Ganache..."
 fi
 
-if inquire "⚙️ Do you want to install and configure Git (y/n)?"; then
+if inquire "⚙️ Do you want to install Git (y/n)?"; then
   success "⚙️ Installing Git..."
   brew install git
   git --version
 
-  success "⚙️ Installing Git extensions..."
-  brew install git-flow git-extras git-lfs
+  if inquire "Do you want to Git extensions (git-flow git-extras git-lfs) (y/n)?"; then
+    success "⚙️ Installing Git extensions..."
+    brew install git-flow git-extras git-lfs
+  fi
 
   success "⚙️ Installing GitHub CLI..."
   brew install hub
@@ -171,6 +198,11 @@ if inquire "⚙️ Do you want to install and configure Git (y/n)?"; then
     git config --global user.email "${EMAIL}"
   else
     warning "⏩  Skipping configuration of git..."
+  fi
+
+  if inquire "Do you want to install Sourcetree (y/n)?"; then
+    success "🌳 Installing Sourcetree"
+    brew install --cask sourcetree
   fi
 else
   warning "⏩  Skipping installation of git..."
@@ -287,14 +319,14 @@ else
   warning "⏩  Skipping installation of programming languages..."
 fi
 
-if inquire "Do you want to install Binance (y/n)?"; then
+if inquire "Do you want to install cryptocurrencies-related software (y/n)?"; then
   success "⚙️ Installing Binance..."
   brew install --cask binance
-fi
 
-if inquire "Do you want to install Ledger Live (y/n)?"; then
-  success "⚙️ Installing Ledger Live..."
-  brew install --cask ledger-live
+  if inquire "Do you have Ledger (y/n)?"; then
+    success "⚙️ Installing Ledger Live..."
+    brew install --cask ledger-live
+  fi
 fi
 
 if inquire "Do you want to install fonts (y/n)?"; then
@@ -378,38 +410,43 @@ if inquire "🔬 Do you want to install network/traffic analysis tools (y/n)?"; 
     ngrok
     telnet
     tcpdump
-    wireshark
     prettyping
   )
   brew install "${utils[@]}"
+
+  success "🦈 Installing Wireshark..."
+  brew install --cask wireshark
+
 fi
 
-if inquire "🛠 Do you want to install Node and TypeScript (y/n)?"; then
+if inquire "🛠 Do you want to install JS-related software (y/n)?"; then
   success "🛠 Installing Node and TypeScript..."
   brew install nvm node typescript deno
 fi
 
-success "🛠 Installing misc developer CLI-tools..."
-dev_utils=(
-  jq
-  bat
-  tokei
-  httpie
-  neovim
-  ffmpeg
-  libjpeg
-  gettext
-  hadolint
-  automake
-  readline
-  hyperfine
-  shellcheck
-  screenfetch
-)
-brew install "${dev_utils[@]}"
+if inquire "🛠 Do you want to other CLI-tools (y/n)?"; then
+  success "🛠 Installing misc developer CLI-tools..."
+  dev_utils=(
+    jq
+    bat
+    tokei
+    httpie
+    neovim
+    ffmpeg
+    libjpeg
+    gettext
+    hadolint
+    automake
+    readline
+    hyperfine
+    shellcheck
+    screenfetch
+  )
+  brew install "${dev_utils[@]}"
 
-success "⚙️ Installing other libraries and commandline utils..."
-brew install fzf wget tree trash rename readline
+  success "⚙️ Installing other libraries and commandline utils..."
+  brew install fzf wget tree trash rename readline
+fi
 
 if inquire "🐠 Do you want to install fish (y/n)?"; then
   success "🐠 Installing fish..."
@@ -429,155 +466,157 @@ fi
 
 brew cleanup
 
-success "💻 Changing macOS's settings..."
+if inquire "⚙️ Do you want to change the default settings of your OS (y/n)?"; then
+  success "💻 Changing macOS's settings..."
 
-# Sleep the display after 15 minutes
-sudo pmset -a displaysleep 10
+  # Sleep the display after 15 minutes
+  sudo pmset -a displaysleep 10
 
-# Disable machine sleep while charging
-sudo pmset -c sleep 0
+  # Disable machine sleep while charging
+  sudo pmset -c sleep 0
 
-# Set machine sleep to 5 minutes on battery
-sudo pmset -b sleep 5
+  # Set machine sleep to 5 minutes on battery
+  sudo pmset -b sleep 5
 
-# Disable shit I hate.
-defaults write com.apple.dashboard mcx-disabled -boolean YES
+  # Disable shit I hate.
+  defaults write com.apple.dashboard mcx-disabled -boolean YES
 
-# This line deactivates rubber scrolling:
-defaults write -g NSScrollViewRubberbanding -int 0
+  # This line deactivates rubber scrolling:
+  defaults write -g NSScrollViewRubberbanding -int 0
 
-# Scrollbars visible when scrolling:
-defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
+  # Scrollbars visible when scrolling:
+  defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 
-# Maximize windows on double clicking them:
-defaults write -g AppleActionOnDoubleClick 'Maximize'
+  # Maximize windows on double clicking them:
+  defaults write -g AppleActionOnDoubleClick 'Maximize'
 
-# Require password immediately after sleep or screen saver begins
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
+  # Require password immediately after sleep or screen saver begins
+  defaults write com.apple.screensaver askForPassword -int 1
+  defaults write com.apple.screensaver askForPasswordDelay -int 0
 
-# Don’t send search queries to Apple
-defaults write com.apple.Safari UniversalSearchEnabled -bool false
-defaults write com.apple.Safari SuppressSearchSuggestions -bool true
+  # Don’t send search queries to Apple
+  defaults write com.apple.Safari UniversalSearchEnabled -bool false
+  defaults write com.apple.Safari SuppressSearchSuggestions -bool true
 
-# Improve security
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles -bool false
+  # Improve security
+  defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false
+  defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles -bool false
 
-# Show the full URL in the address bar (note: this still hides the scheme)
-defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
+  # Show the full URL in the address bar (note: this still hides the scheme)
+  defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
 
-# Set Safari’s home page to `about:blank` for faster loading
-defaults write com.apple.Safari HomePage -string "about:blank"
+  # Set Safari’s home page to `about:blank` for faster loading
+  defaults write com.apple.Safari HomePage -string "about:blank"
 
-# Disable Safari’s thumbnail cache for History and Top Sites
-defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
+  # Disable Safari’s thumbnail cache for History and Top Sites
+  defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
 
-# Enable Safari’s debug menu
-defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+  # Enable Safari’s debug menu
+  defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 
-# Disable AutoFill
-defaults write com.apple.Safari AutoFillFromAddressBook -bool false
-defaults write com.apple.Safari AutoFillPasswords -bool false
-defaults write com.apple.Safari AutoFillCreditCardData -bool false
-defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false
+  # Disable AutoFill
+  defaults write com.apple.Safari AutoFillFromAddressBook -bool false
+  defaults write com.apple.Safari AutoFillPasswords -bool false
+  defaults write com.apple.Safari AutoFillCreditCardData -bool false
+  defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false
 
-# Enable “Do Not Track”
-defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
+  # Enable “Do Not Track”
+  defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
 
-# Update extensions automatically
-defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
+  # Update extensions automatically
+  defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
 
-# Show Finder path bar:
-defaults write com.apple.finder ShowPathbar -bool true
+  # Show Finder path bar:
+  defaults write com.apple.finder ShowPathbar -bool true
 
-# Disable autocorrect:
-defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+  # Disable autocorrect:
+  defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
-# Disable auto-capitalization:
-defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+  # Disable auto-capitalization:
+  defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
 
-# Notification dismiss timeout:
-defaults write com.apple.notificationcenterui bannerTime -int 4
+  # Notification dismiss timeout:
+  defaults write com.apple.notificationcenterui bannerTime -int 4
 
-# Turn on app auto-update
-defaults write com.apple.commerce AutoUpdate -bool true
+  # Turn on app auto-update
+  defaults write com.apple.commerce AutoUpdate -bool true
 
-# Automatically download apps purchased on other Macs
-defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1
+  # Automatically download apps purchased on other Macs
+  defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1
 
-# Download newly available updates in background
-defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
+  # Download newly available updates in background
+  defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
 
-# Auto-play videos when opened with QuickTime Player
-defaults write com.apple.QuickTimePlayerX MGPlayMovieOnOpen -bool true
+  # Auto-play videos when opened with QuickTime Player
+  defaults write com.apple.QuickTimePlayerX MGPlayMovieOnOpen -bool true
 
-# Sort Activity Monitor results by CPU usage
-defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
-defaults write com.apple.ActivityMonitor SortDirection -int 0
+  # Sort Activity Monitor results by CPU usage
+  defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
+  defaults write com.apple.ActivityMonitor SortDirection -int 0
 
-# Show all processes in Activity Monitor
-defaults write com.apple.ActivityMonitor ShowCategory -int 0
+  # Show all processes in Activity Monitor
+  defaults write com.apple.ActivityMonitor ShowCategory -int 0
 
-# Prevent Time Machine from prompting to use new hard drives as backup volume
-defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+  # Prevent Time Machine from prompting to use new hard drives as backup volume
+  defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
-# Don’t display the annoying prompt when quitting iTerm
-defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+  # Don’t display the annoying prompt when quitting iTerm
+  defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
-# Only use UTF-8 in Terminal.app
-defaults write com.apple.terminal StringEncodings -array 4
+  # Only use UTF-8 in Terminal.app
+  defaults write com.apple.terminal StringEncodings -array 4
 
-# Don’t show recent applications in Dock
-defaults write com.apple.dock show-recents -bool false
+  # Don’t show recent applications in Dock
+  defaults write com.apple.dock show-recents -bool false
 
-# Speed up Mission Control animations
-defaults write com.apple.dock expose-animation-duration -float 0.1
+  # Speed up Mission Control animations
+  defaults write com.apple.dock expose-animation-duration -float 0.1
 
-# Show indicator lights for open applications in the Dock
-defaults write com.apple.dock show-process-indicators -bool true
+  # Show indicator lights for open applications in the Dock
+  defaults write com.apple.dock show-process-indicators -bool true
 
-# Minimize windows into their application’s icon
-defaults write com.apple.dock minimize-to-application -bool true
+  # Minimize windows into their application’s icon
+  defaults write com.apple.dock minimize-to-application -bool true
 
-# Show the ~/Library folder
-chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
+  # Show the ~/Library folder
+  chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
 
-# Disable the warning before emptying the Trash
-defaults write com.apple.finder WarnOnEmptyTrash -bool false
+  # Disable the warning before emptying the Trash
+  defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
-# Avoid creating .DS_Store files on network or USB volumes
-defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+  # Avoid creating .DS_Store files on network or USB volumes
+  defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+  defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
-# Disable the warning when changing a file extension
-defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+  # Disable the warning when changing a file extension
+  defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
-# When performing a search, search the current folder by default
-defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+  # When performing a search, search the current folder by default
+  defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
-# Keep folders on top when sorting by name
-defaults write com.apple.finder _FXSortFoldersFirst -bool true
+  # Keep folders on top when sorting by name
+  defaults write com.apple.finder _FXSortFoldersFirst -bool true
 
-# Display full POSIX path as Finder window title
-defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+  # Display full POSIX path as Finder window title
+  defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
-# Show all filename extensions in Finder
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+  # Show all filename extensions in Finder
+  defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
-# Save screenshots in PNG format
-defaults write com.apple.screencapture type -string "png"
+  # Save screenshots in PNG format
+  defaults write com.apple.screencapture type -string "png"
 
-# Save screenshots to the desktop
-defaults write com.apple.screencapture location -string "${HOME}/Desktop"
+  # Save screenshots to the desktop
+  defaults write com.apple.screencapture location -string "${HOME}/Desktop"
 
-# Show icons for hard drives, servers, and removable media on the desktop
-defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
-defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+  # Show icons for hard drives, servers, and removable media on the desktop
+  defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+  defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+  defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+  defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 
-killall Finder
-killall Dock
+  killall Finder
+  killall Dock
+fi
 
 success '✨ Done!'
