@@ -32,7 +32,7 @@ which is shortened version of:
 bash <(curl https://raw.githubusercontent.com/lk-geimfari/macbook/exec/install.sh -sSf)
 ```
 
-`exec` is a stable branch which means it can be outdated.
+`exec` is a stable branch which means it can be outdated in comparison with a `master`.
 
 ## License
 
