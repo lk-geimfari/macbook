@@ -95,7 +95,7 @@ if inquire "🍺 Do you want to install productivity apps (y/n)?"; then
     fi
 
     if inquire "⚙️ Do you want to install Brave Browser (y/n)?"; then
-      success "🦁 Installing Mozilla Brave Browser..."
+      success "🦁 Installing Brave Browser..."
       brew install --cask brave-browser
     fi
   else
