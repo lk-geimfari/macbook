@@ -18,7 +18,7 @@ sleep .1
 read -p "$(success '👤 Enter your name: ')" AUTHOR
 read -p "$(success '📧 Enter your email: ')" EMAIL
 
-inquire() {
+ask() {
   while true; do
     read -p "$(success "$1")" yn
     case $yn in
@@ -29,7 +29,7 @@ inquire() {
   done
 }
 
-if inquire "🔑 Do you want to generate SSH keys (y/n)? "; then
+if ask "🔑 Do you want to generate SSH keys (y/n)? "; then
   read -p "Please, specify the type of key (RSA, ECDSA or ED25519): " SSH_KEY_TYPE
 
   case $SSH_KEY_TYPE in
@@ -53,14 +53,14 @@ else
   warning "⏩  Skipping generation of SSH keys..."
 fi
 
-if inquire "⚙️ Do you want to install Xcode command line tools (y/n)?"; then
+if ask "⚙️ Do you want to install Xcode command line tools (y/n)?"; then
   success "⚙️ Installing Xcode command line tools..."
   xcode-select --install
 else
   warning "⏩  Skipping installation of Xcode command line tools..."
 fi
 
-if inquire "🍺 Do you want to install Homebrew (y/n)?"; then
+if ask "🍺 Do you want to install Homebrew (y/n)?"; then
   success "🍺 Installing homebrew..."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   brew update
@@ -79,14 +79,14 @@ else
   warning "⏩  Skipping installation of Homebrew..."
 fi
 
-if inquire "🍺 Do you want to install productivity apps (y/n)?"; then
-  if inquire "🍺 Do you want to install browsers (y/n)?"; then
-    if inquire "⚙️ Do you want to install Mozilla Firefox (y/n)?"; then
+if ask "🍺 Do you want to install productivity apps (y/n)?"; then
+  if ask "🍺 Do you want to install browsers (y/n)?"; then
+    if ask "⚙️ Do you want to install Mozilla Firefox (y/n)?"; then
       success "🦊 Installing Mozilla Firefox..."
       brew install --cask firefox
     fi
 
-    if inquire "⚙️ Do you want to install Brave Browser (y/n)?"; then
+    if ask "⚙️ Do you want to install Brave Browser (y/n)?"; then
       success "🦁 Installing Brave Browser..."
       brew install --cask brave-browser
     fi
@@ -94,8 +94,8 @@ if inquire "🍺 Do you want to install productivity apps (y/n)?"; then
     warning "⏩  Skipping installation of browsers..."
   fi
 
-  if inquire "Does your Macbook has notch? (y/n)?"; then
-    if inquire "Do you want to install TopNotch and Bartender? (y/n)?"; then
+  if ask "Does your Macbook has notch? (y/n)?"; then
+    if ask "Do you want to install TopNotch and Bartender? (y/n)?"; then
       success "⚙️ Installing Bartender"
       brew install --cask bartender
 
@@ -104,7 +104,7 @@ if inquire "🍺 Do you want to install productivity apps (y/n)?"; then
     fi
   fi
 
-  if inquire "Do you want to install communication apps (y/n)?"; then
+  if ask "Do you want to install communication apps (y/n)?"; then
     success "⚙️ Installing Slack..."
     brew install --cask slack
 
@@ -119,7 +119,7 @@ if inquire "🍺 Do you want to install productivity apps (y/n)?"; then
   fi
 fi
 
-if inquire "Do you want to install iTerm2 (y/n)?"; then
+if ask "Do you want to install iTerm2 (y/n)?"; then
   success "💻 Installing iTerm2..."
   brew install --cask iterm2
 
@@ -127,7 +127,7 @@ if inquire "Do you want to install iTerm2 (y/n)?"; then
   brew install --cask openinterminal
 fi
 
-if inquire "Do you want to install utils (y/n)?"; then
+if ask "Do you want to install utils (y/n)?"; then
   success "☁️ Installing Dropbox..."
   brew install --cask dropbox
 
@@ -144,31 +144,31 @@ if inquire "Do you want to install utils (y/n)?"; then
   brew install --cask spotify
 fi
 
-if inquire "Do you want to install VirtualBox (y/n)?"; then
+if ask "Do you want to install VirtualBox (y/n)?"; then
   success "📦 Installing VirtualBox..."
   brew install --cask virtualbox
 fi
 
-if inquire "Do you want to install Dash (y/n)?"; then
+if ask "Do you want to install Dash (y/n)?"; then
   success "📚 Installing Dash..."
   brew install --cask dash
 fi
 
-if inquire "Do you want to install Visual Studio Code (y/n)?"; then
+if ask "Do you want to install Visual Studio Code (y/n)?"; then
   success "⚙️ Installing Visual Studio Code..."
   brew install --cask visual-studio-code
 
   if command -v code &>/dev/null; then
-    if inquire "Do you want to install extensions for your VS Code (y/n)?"; then
-      if inquire "[VS Code] Do you want to install extensions for programming languages (y/n)?"; then
-        if inquire "[VS Code] Do you want to install Python (y/n)?"; then
+    if ask "Do you want to install extensions for your VS Code (y/n)?"; then
+      if ask "[VS Code] Do you want to install extensions for programming languages (y/n)?"; then
+        if ask "[VS Code] Do you want to install Python (y/n)?"; then
           code --install-extension ms-python.python
           code --install-extension dongli.python-preview
           code --install-extension ms-python.vscode-pylance
           code --install-extension batisteo.vscode-django
         fi
 
-        if inquire "[VS Code] Do you want to install Clojure (y/n)?"; then
+        if ask "[VS Code] Do you want to install Clojure (y/n)?"; then
           code --install-extension vscjava.vscode-java-dependency
           code --install-extension avli.clojure
         fi
@@ -178,22 +178,22 @@ if inquire "Do you want to install Visual Studio Code (y/n)?"; then
 
 fi
 
-if inquire "Do you want to install DB management tools (y/n)?"; then
+if ask "Do you want to install DB management tools (y/n)?"; then
   success "Installing DB Browser for SQLite"
   brew install --cask db-browser-for-sqlite
 fi
 
-if inquire "Do you want to install Ganache (y/n)?"; then
+if ask "Do you want to install Ganache (y/n)?"; then
   success "⚙️ Installing Ganache..."
   brew install --cask ganache
 fi
 
-if inquire "⚙️ Do you want to install Git (y/n)?"; then
+if ask "⚙️ Do you want to install Git (y/n)?"; then
   success "⚙️ Installing Git..."
   brew install git
   git --version
 
-  if inquire "Do you want to Git extensions (git-flow git-extras git-lfs) (y/n)?"; then
+  if ask "Do you want to Git extensions (git-flow git-extras git-lfs) (y/n)?"; then
     success "⚙️ Installing Git extensions..."
     brew install git-flow git-extras git-lfs
   fi
@@ -201,7 +201,7 @@ if inquire "⚙️ Do you want to install Git (y/n)?"; then
   success "⚙️ Installing GitHub CLI..."
   brew install hub
 
-  if inquire "Do you want to configure Git (y/n)?"; then
+  if ask "Do you want to configure Git (y/n)?"; then
     success "⚙️ Configuring Git..."
     git config --global user.name "${AUTHOR}"
     git config --global user.email "${EMAIL}"
@@ -209,7 +209,7 @@ if inquire "⚙️ Do you want to install Git (y/n)?"; then
     warning "⏩  Skipping configuration of git..."
   fi
 
-  if inquire "Do you want to install Sourcetree (y/n)?"; then
+  if ask "Do you want to install Sourcetree (y/n)?"; then
     success "🌳 Installing Sourcetree"
     brew install --cask sourcetree
   fi
@@ -217,9 +217,9 @@ else
   warning "⏩  Skipping installation of git..."
 fi
 
-if inquire "❤️ Do you want to install the GNU software collection? (y/n)?"; then
+if ask "❤️ Do you want to install the GNU software collection? (y/n)?"; then
   # See: https://www.gnu.org/software/coreutils/
-  if inquire "⚙️ Do you want to install GNU coreutils (y/n)?"; then
+  if ask "⚙️ Do you want to install GNU coreutils (y/n)?"; then
     success "⚙️ Installing GNU coreutils..."
     brew install --force-bottle coreutils
   else
@@ -227,7 +227,7 @@ if inquire "❤️ Do you want to install the GNU software collection? (y/n)?"; 
   fi
 
   # See: https://www.gnu.org/software/diffutils/
-  if inquire "⚙️ Do you want to install GNU diffutils (y/n)?"; then
+  if ask "⚙️ Do you want to install GNU diffutils (y/n)?"; then
     success "⚙️ Installing GNU diffutils..."
     brew install --force-bottle diffutils
   else
@@ -235,7 +235,7 @@ if inquire "❤️ Do you want to install the GNU software collection? (y/n)?"; 
   fi
 
   # See: https://savannah.gnu.org/projects/which/
-  if inquire "⚙️ Do you want to install GNU which (y/n)?"; then
+  if ask "⚙️ Do you want to install GNU which (y/n)?"; then
     success "⚙️ Installing GNU which..."
     brew install gnu-which --with-default-names
   else
@@ -243,7 +243,7 @@ if inquire "❤️ Do you want to install the GNU software collection? (y/n)?"; 
   fi
 
   # See: https://www.gnu.org/software/sed/
-  if inquire "⚙️ Do you want to install GNU sed (y/n)?"; then
+  if ask "⚙️ Do you want to install GNU sed (y/n)?"; then
     success "⚙️ Installing GNU sed..."
     brew install gnu-sed --with-default-names
   else
@@ -251,7 +251,7 @@ if inquire "❤️ Do you want to install the GNU software collection? (y/n)?"; 
   fi
 
   # See: https://www.gnu.org/software/findutils/
-  if inquire "🔍 Do you want to install GNU findutils (y/n)?"; then
+  if ask "🔍 Do you want to install GNU findutils (y/n)?"; then
     success "🔍 Installing GNU findutils (find, locate, updatedb, and xargs)..."
     brew install --force-bottle findutils --with-default-names
   else
@@ -259,7 +259,7 @@ if inquire "❤️ Do you want to install the GNU software collection? (y/n)?"; 
   fi
 
   # See: https://www.gnu.org/software/indent/
-  if inquire "⚙️ Do you want to install GNU Indent (y/n)?"; then
+  if ask "⚙️ Do you want to install GNU Indent (y/n)?"; then
     success "⚙️ Installing GNU Indent..."
     brew install gnu-indent
   else
@@ -267,7 +267,7 @@ if inquire "❤️ Do you want to install the GNU software collection? (y/n)?"; 
   fi
 
   # See: https://www.gnu.org/software/grep/
-  if inquire "🔍 Do you want to install GNU grep (y/n)?"; then
+  if ask "🔍 Do you want to install GNU grep (y/n)?"; then
     success "🔍 Installing GNU grep..."
     brew install grep --with-default-names
   else
@@ -275,7 +275,7 @@ if inquire "❤️ Do you want to install the GNU software collection? (y/n)?"; 
   fi
 fi
 
-if inquire "🗜 Do you want to install compression/decompression tools (y/n)?"; then
+if ask "🗜 Do you want to install compression/decompression tools (y/n)?"; then
   success "🗜 Installing The Unarchiver..."
   brew install --cask the-unarchiver
 
@@ -288,39 +288,39 @@ else
   warning "⏩  Skipping installation of compression/decompression tools..."
 fi
 
-if inquire "💡 Do you want to install various programming languages (y/n)?"; then
-  if inquire "🐍 Do you want to install Python 3 (y/n)?"; then
+if ask "💡 Do you want to install various programming languages (y/n)?"; then
+  if ask "🐍 Do you want to install Python 3 (y/n)?"; then
     success "🐍 Installing Python..."
     brew install python@3.9 ipython pyenv
     python --version
     pyenv --version
   fi
 
-  if inquire "🦀 Do you want to install Rust (y/n)?"; then
+  if ask "🦀 Do you want to install Rust (y/n)?"; then
     success "🦀 Installing Rust..."
     curl https://sh.rustup.rs -sSf | sh
     rustup update
     rustc --version
   fi
 
-  if inquire "⚙️ Do you want to install Erlang (y/n)?"; then
+  if ask "⚙️ Do you want to install Erlang (y/n)?"; then
     success "⚙️ Installing Erlang..."
     brew install erlang rebar3
   fi
 
-  if inquire "🧪 Do you want to install Elixir (y/n)?"; then
+  if ask "🧪 Do you want to install Elixir (y/n)?"; then
     success "🧪 Installing Elixir..."
     brew install elixir
     iex --version
   fi
 
-  if inquire "☕️️ Do you want to install Java (y/n)?"; then
+  if ask "☕️️ Do you want to install Java (y/n)?"; then
     success "☕️️ Installing Java..."
     brew install --cask java
     java --version
   fi
 
-  if inquire "⚙️ Do you want to install Clojure (y/n)?"; then
+  if ask "⚙️ Do you want to install Clojure (y/n)?"; then
     success "🍺 Homebrew: tap clojure/tools..."
     brew tap clojure/tools
     brew update
@@ -332,17 +332,17 @@ else
   warning "⏩  Skipping installation of programming languages..."
 fi
 
-if inquire "Do you want to install cryptocurrencies-related software (y/n)?"; then
+if ask "Do you want to install cryptocurrencies-related software (y/n)?"; then
   success "⚙️ Installing Binance..."
   brew install --cask binance
 
-  if inquire "Do you have Ledger (y/n)?"; then
+  if ask "Do you have Ledger (y/n)?"; then
     success "⚙️ Installing Ledger Live..."
     brew install --cask ledger-live
   fi
 fi
 
-if inquire "Do you want to install fonts (y/n)?"; then
+if ask "Do you want to install fonts (y/n)?"; then
   success "🍺 Homebrew: tap caskroom/fonts..."
   brew tap caskroom/fonts
   brew update
@@ -358,35 +358,35 @@ if inquire "Do you want to install fonts (y/n)?"; then
   brew install --cask "${fonts[@]}"
 fi
 
-if inquire "🛡 Do you want to install privacy and security software (y/n)?"; then
-  if inquire "Do you want to install Tor Browser (y/n)?"; then
+if ask "🛡 Do you want to install privacy and security software (y/n)?"; then
+  if ask "Do you want to install Tor Browser (y/n)?"; then
     brew install --cask tor-browser
   fi
-  if inquire "🔒 Do you want to install GPG Suite (y/n)?"; then
+  if ask "🔒 Do you want to install GPG Suite (y/n)?"; then
     success "🔒 Installing GPG Suite..."
     brew install --cask gpg-suite
   fi
-  if inquire "⚙️ Do you want to install OpenSSH (y/n)?"; then
+  if ask "⚙️ Do you want to install OpenSSH (y/n)?"; then
     success "🔒 Installing OpenSSH..."
     brew install openssh
   fi
-  if inquire "⚙️ Do you want to install OpenSSL (y/n)?"; then
+  if ask "⚙️ Do you want to install OpenSSL (y/n)?"; then
     success "🔒 Installing OpenSSL..."
     brew install openssl
   fi
-  if inquire "⚙️ Do you want to install 1Password (y/n)?"; then
+  if ask "⚙️ Do you want to install 1Password (y/n)?"; then
     success "⚙️ Installing 1Password..."
     brew install --cask 1password
   fi
-  if inquire "⚙️ Do you want to install Authy (y/n)?"; then
+  if ask "⚙️ Do you want to install Authy (y/n)?"; then
     success "⚙️ Installing Authy..."
     brew install --cask authy
   fi
-  if inquire "🐻 Do you want to install TunnelBear (y/n)?"; then
+  if ask "🐻 Do you want to install TunnelBear (y/n)?"; then
     success "🐻 Installing TunnelBear..."
     brew install --cask tunnelbear
   fi
-  if inquire "☁️ Do you want to install CloudFlare Warp (y/n)?"; then
+  if ask "☁️ Do you want to install CloudFlare Warp (y/n)?"; then
     success "☁️ Installing CloudFlare Warp..."
     brew install --cask cloudflare-warp
   fi
@@ -394,32 +394,32 @@ else
   warning "⏩  Skipping installation of privacy and security software..."
 fi
 
-if inquire "🛠 Do you want to install JetBrain's IDEs (y/n)?"; then
+if ask "🛠 Do you want to install JetBrain's IDEs (y/n)?"; then
   success "⚙️ Installing JetBrains Toolbox..."
   brew install --cask jetbrains-toolbox
 
-  if inquire "🛠 Do you want to install PyCharm (y/n)?"; then
+  if ask "🛠 Do you want to install PyCharm (y/n)?"; then
     success "⚙️ Installing PyCharm Professional..."
     brew install --cask pycharm
   fi
 
-  if inquire "🛠 Do you want to install WebStorm (y/n)?"; then
+  if ask "🛠 Do you want to install WebStorm (y/n)?"; then
     success "⚙️ Installing WebStorm..."
     brew install --cask webstorm
   fi
 
-  if inquire "🛠 Do you want to install DataGrip (y/n)?"; then
+  if ask "🛠 Do you want to install DataGrip (y/n)?"; then
     success "⚙️ Installing DataGrip..."
     brew install --cask datagrip
   fi
 
-  if inquire "🛠 Do you want to IntelliJ IDEA Ultimate (y/n)?"; then
+  if ask "🛠 Do you want to IntelliJ IDEA Ultimate (y/n)?"; then
     success "⚙️ Installing IntelliJ IDEA Ultimate..."
     brew install --cask intellij-idea
   fi
 fi
 
-if inquire "🔬 Do you want to install network/traffic analysis tools (y/n)?"; then
+if ask "🔬 Do you want to install network/traffic analysis tools (y/n)?"; then
   success "🔬 Installing network/traffic analysis tools"
   utils=(
     mtr
@@ -436,12 +436,12 @@ if inquire "🔬 Do you want to install network/traffic analysis tools (y/n)?"; 
 
 fi
 
-if inquire "🛠 Do you want to install toolset for frontend development (y/n)?"; then
+if ask "🛠 Do you want to install toolset for frontend development (y/n)?"; then
   success "🛠 Installing Node and TypeScript..."
   brew install nvm node typescript deno
 fi
 
-if inquire "🛠 Do you want to other CLI-tools (y/n)?"; then
+if ask "🛠 Do you want to other CLI-tools (y/n)?"; then
   success "🛠 Installing misc developer CLI-tools..."
   dev_utils=(
     jq
@@ -472,7 +472,7 @@ if inquire "🛠 Do you want to other CLI-tools (y/n)?"; then
   done
 fi
 
-if inquire "🐠 Do you want to install fish (y/n)?"; then
+if ask "🐠 Do you want to install fish (y/n)?"; then
   success "🐠 Installing fish..."
   brew install fish
 
@@ -490,7 +490,7 @@ fi
 
 brew cleanup
 
-if inquire "⚙️ Do you want to change the default settings of your OS (y/n)?"; then
+if ask "⚙️ Do you want to change the default settings of your OS (y/n)?"; then
   success "💻 Changing macOS's settings..."
 
   # Sleep the display after 15 minutes
