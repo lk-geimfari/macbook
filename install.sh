@@ -53,8 +53,6 @@ else
   warning "⏩  Skipping generation of SSH keys..."
 fi
 
-exit
-
 if inquire "⚙️ Do you want to install Xcode command line tools (y/n)?"; then
   success "⚙️ Installing Xcode command line tools..."
   xcode-select --install
