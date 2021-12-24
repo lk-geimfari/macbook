@@ -46,7 +46,7 @@ if inquire "🔑 Do you want to generate SSH keys (y/n)? "; then
     ssh-keygen -o -a 256 -t ed25519 -C "${EMAIL}" -f ~/.ssh/id_ed25519
     ;;
   *)
-    warning "Unknown key type. Skipping generation of keys..."
+    warning "⏩  Unknown key type. Skipping generation of keys..."
     ;;
   esac
 else
@@ -68,17 +68,11 @@ if inquire "🍺 Do you want to install Homebrew (y/n)?"; then
   success "🍺 Installing homebrew cask"
   brew install caskroom/cask/brew-cask
 
-  success "🍺 Homebrew tap caskroom/fonts..."
-  brew tap caskroom/fonts
-
-  success "🍺 Homebrew tap caskroom/versions..."
+  success "🍺 Homebrew: tap caskroom/versions..."
   brew tap caskroom/versions
 
-  success "🍺 Homebrew tap homebrew/cask-versions..."
+  success "🍺 Homebrew: tap homebrew/cask-versions..."
   brew tap homebrew/cask-versions
-
-  success "🍺 Homebrew tap clojure/tools..."
-  brew tap clojure/tools
 
   brew --version
 else
@@ -163,6 +157,25 @@ fi
 if inquire "Do you want to install Visual Studio Code (y/n)?"; then
   success "⚙️ Installing Visual Studio Code..."
   brew install --cask visual-studio-code
+
+  if command -v code &>/dev/null; then
+    if inquire "Do you want to install extensions for your VS Code (y/n)?"; then
+      if inquire "[VS Code] Do you want to install extensions for programming languages (y/n)?"; then
+        if inquire "[VS Code] Do you want to install Python (y/n)?"; then
+          code --install-extension ms-python.python
+          code --install-extension dongli.python-preview
+          code --install-extension ms-python.vscode-pylance
+          code --install-extension batisteo.vscode-django
+        fi
+
+        if inquire "[VS Code] Do you want to install Clojure (y/n)?"; then
+          code --install-extension vscjava.vscode-java-dependency
+          code --install-extension avli.clojure
+        fi
+      fi
+    fi
+  fi
+
 fi
 
 if inquire "Do you want to install DB management tools (y/n)?"; then
@@ -173,8 +186,6 @@ fi
 if inquire "Do you want to install Ganache (y/n)?"; then
   success "⚙️ Installing Ganache..."
   brew install --cask ganache
-else
-  warning "⏩  Skipping installation of Ganache..."
 fi
 
 if inquire "⚙️ Do you want to install Git (y/n)?"; then
@@ -310,6 +321,10 @@ if inquire "💡 Do you want to install various programming languages (y/n)?"; t
   fi
 
   if inquire "⚙️ Do you want to install Clojure (y/n)?"; then
+    success "🍺 Homebrew: tap clojure/tools..."
+    brew tap clojure/tools
+    brew update
+
     success "⚙️ Installing Clojure..."
     brew install clojure/tools/clojure leiningen
   fi
@@ -328,6 +343,10 @@ if inquire "Do you want to install cryptocurrencies-related software (y/n)?"; th
 fi
 
 if inquire "Do you want to install fonts (y/n)?"; then
+  success "🍺 Homebrew: tap caskroom/fonts..."
+  brew tap caskroom/fonts
+  brew update
+
   success "⚙️ Installing fonts..."
   fonts=(
     font-hasklig
@@ -417,7 +436,7 @@ if inquire "🔬 Do you want to install network/traffic analysis tools (y/n)?"; 
 
 fi
 
-if inquire "🛠 Do you want to install JS-related software (y/n)?"; then
+if inquire "🛠 Do you want to install toolset for frontend development (y/n)?"; then
   success "🛠 Installing Node and TypeScript..."
   brew install nvm node typescript deno
 fi
@@ -426,13 +445,19 @@ if inquire "🛠 Do you want to other CLI-tools (y/n)?"; then
   success "🛠 Installing misc developer CLI-tools..."
   dev_utils=(
     jq
+    fzf
     bat
+    wget
+    tree
+    trash
     tokei
+    rename
     httpie
     neovim
     ffmpeg
     libjpeg
     gettext
+    readline
     hadolint
     automake
     readline
@@ -440,10 +465,11 @@ if inquire "🛠 Do you want to other CLI-tools (y/n)?"; then
     shellcheck
     screenfetch
   )
-  brew install "${dev_utils[@]}"
 
-  success "⚙️ Installing other libraries and commandline utils..."
-  brew install fzf wget tree trash rename readline
+  for package in "${dev_utils[@]}"; do
+    success "⚙️ Installing ${package}..."
+    brew install "${package}"
+  done
 fi
 
 if inquire "🐠 Do you want to install fish (y/n)?"; then
