@@ -425,6 +425,7 @@ if ask "🔬 Do you want to install network/traffic analysis tools (y/n)?"; then
     mtr
     tmux
     ngrok
+    hping
     telnet
     tcpdump
     prettyping
