@@ -96,10 +96,10 @@ if ask "🍺 Do you want to install productivity apps (y/n)?"; then
 
   if ask "Does your Macbook has notch? (y/n)?"; then
     if ask "Do you want to install TopNotch and Bartender? (y/n)?"; then
-      success "⚙️ Installing Bartender"
+      success "⚙️ Installing Bartender..."
       brew install --cask bartender
 
-      success "⚙️ Installing TopNotch"
+      success "⚙️ Installing TopNotch..."
       brew install --cask topnotch
     fi
   fi
@@ -131,7 +131,7 @@ if ask "Do you want to install utils (y/n)?"; then
   success "☁️ Installing Dropbox..."
   brew install --cask dropbox
 
-  success "⚙️ Installing Bartender"
+  success "⚙️ Installing AppCleaner..."
   brew install --cask appcleaner
 
   success "⚙️ Installing VLC..."
