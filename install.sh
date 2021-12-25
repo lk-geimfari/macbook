@@ -386,6 +386,10 @@ if ask "🛡 Do you want to install privacy and security software (y/n)?"; then
     success "🐻 Installing TunnelBear..."
     brew install --cask tunnelbear
   fi
+  if ask "⚙️ Do you want to install NordVPN (y/n)?"; then
+    success "⚙️ Installing NordVPN..."
+    brew install --cask nordvpn
+  fi
   if ask "☁️ Do you want to install CloudFlare Warp (y/n)?"; then
     success "☁️ Installing CloudFlare Warp..."
     brew install --cask cloudflare-warp
@@ -432,8 +436,15 @@ if ask "🔬 Do you want to install network/traffic analysis tools (y/n)?"; then
   )
   brew install "${utils[@]}"
 
-  success "🦈 Installing Wireshark..."
-  brew install --cask wireshark
+  if ask "⚙️ Do you want to install Wireshark (y/n)?"; then
+    success "⚙️ Installing Wireshark..."
+    brew install --cask wireshark
+  fi
+
+  if ask "⚙️ Do you want to install Angry IP Scanner (y/n)?"; then
+    success "⚙️ Installing Angry IP Scanner..."
+    brew install --cask angry-ip-scanner
+  fi
 
 fi
 
