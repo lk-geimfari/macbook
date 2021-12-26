@@ -74,7 +74,7 @@ if ask "🍺 Do you want to install Homebrew (y/n)?"; then
   success "🍺 Homebrew: tap homebrew/cask-versions..."
   brew tap homebrew/cask-versions
 
-  if ask "Do you want to install Cakebrew? (y/n)"; then
+  if ask "🍺 Do you want to install Cakebrew? (y/n)"; then
     brew install --cask cakebrew
   fi
 
@@ -83,8 +83,13 @@ else
   warning "⏩  Skipping installation of Homebrew..."
 fi
 
-if ask "🍺 Do you want to install productivity apps (y/n)?"; then
-  if ask "🍺 Do you want to install browsers (y/n)?"; then
+if ask "⚙️ Do you want to install productivity apps (y/n)?"; then
+  if ask "⚙️ Do you want to install qBittorent (y/n)?"; then
+    success "⚙️ Installing qBittorent..."
+    brew install --cask qbittorrent
+  fi
+
+  if ask "⚙️ Do you want to install browsers (y/n)?"; then
     if ask "⚙️ Do you want to install Mozilla Firefox (y/n)?"; then
       success "🦊 Installing Mozilla Firefox..."
       brew install --cask firefox
