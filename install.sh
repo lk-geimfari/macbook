@@ -74,6 +74,10 @@ if ask "🍺 Do you want to install Homebrew (y/n)?"; then
   success "🍺 Homebrew: tap homebrew/cask-versions..."
   brew tap homebrew/cask-versions
 
+  if ask "Do you want to install Cakebrew? (y/n)"; then
+    brew install --cask cakebrew
+  fi
+
   brew --version
 else
   warning "⏩  Skipping installation of Homebrew..."
