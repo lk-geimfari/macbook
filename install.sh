@@ -187,9 +187,21 @@ if ask "Do you want to install Visual Studio Code (y/n)?"; then
 
 fi
 
-if ask "Do you want to install DB management tools (y/n)?"; then
-  success "Installing DB Browser for SQLite"
-  brew install --cask db-browser-for-sqlite
+if ask "⚙️ Do you want to install DB management tools (y/n)?"; then
+  if ask "⚙️ Do you want to install DB Browser for SQLite (y/n)?"; then
+    success "⚙️ Installing DB Browser for SQLite"
+    brew install --cask db-browser-for-sqlite
+  fi
+
+  if ask "⚙️ Do you want to install DBeaver Community (y/n)?"; then
+    success "⚙️ Installing DBeaver Community..."
+    brew install --cask dbeaver-community
+  fi
+
+  if ask "🐝 Do you want to install Beekeeper Studio (y/n)?"; then
+    success "🐝 Installing Beekeeper Studio..."
+    brew install --cask beekeeper-studio
+  fi
 fi
 
 if ask "Do you want to install Ganache (y/n)?"; then
