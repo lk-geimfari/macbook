@@ -387,10 +387,6 @@ if ask "🛡 Do you want to install privacy and security software (y/n)?"; then
     success "🔒 Installing GPG Suite..."
     brew install --cask gpg-suite
   fi
-  if ask "🤖 Do you want to install Cryptomator (y/n)?"; then
-    success "🤖 Installing Cryptomator..."
-    brew install --cask cryptomator
-  fi
   if ask "⚙️ Do you want to install OpenSSH (y/n)?"; then
     success "🔒 Installing OpenSSH..."
     brew install openssh
@@ -437,6 +433,16 @@ if ask "🛠 Do you want to install JetBrain's IDEs (y/n)?"; then
     brew install --cask webstorm
   fi
 
+  if ask "🛠 Do you want to install GoLand (y/n)?"; then
+    success "⚙️ Installing GoLand..."
+    brew install --cask goland
+  fi
+
+  if ask "🛠 Do you want to install CLion (y/n)?"; then
+    success "⚙️ Installing CLion..."
+    brew install --cask clion
+  fi
+
   if ask "🛠 Do you want to install DataGrip (y/n)?"; then
     success "⚙️ Installing DataGrip..."
     brew install --cask datagrip
@@ -446,6 +452,7 @@ if ask "🛠 Do you want to install JetBrain's IDEs (y/n)?"; then
     success "⚙️ Installing IntelliJ IDEA Ultimate..."
     brew install --cask intellij-idea
   fi
+
 fi
 
 if ask "🔬 Do you want to install network/traffic analysis tools (y/n)?"; then
