@@ -687,6 +687,12 @@ if ask "⚙️ Do you want to change the default settings of your OS (y/n)?"; th
   # Save screenshots to the desktop
   defaults write com.apple.screencapture location -string "${HOME}/Desktop"
 
+  # Disable crash reporter
+  defaults write com.apple.CrashReporter DialogType none
+
+  # Don't save documents to iCloud by default
+  defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
   # Show icons for hard drives, servers, and removable media on the desktop
   defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
   defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
