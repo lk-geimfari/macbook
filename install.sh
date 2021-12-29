@@ -12,8 +12,9 @@ warning() {
   echo -e "\e[1;33m$1\e[0m"
 }
 
-info "Starting for $USER...\n"
-sleep .1
+error() {
+  echo -e "\e[1;31m$1\e[0m"
+}
 
 read -p "$(success '👤 Enter your name: ')" AUTHOR
 read -p "$(success '📧 Enter your email: ')" EMAIL
@@ -24,7 +25,7 @@ ask() {
     case $yn in
     [Yy]*) return 0 ;;
     [Nn]*) return 1 ;;
-    *) echo -e "\e[1;31mPlease answer y/Y or n/N\e[0m" ;;
+    *) error "Please answer y/Y or n/N" ;;
     esac
   done
 }
@@ -34,15 +35,15 @@ if ask "🔑 Do you want to generate SSH keys (y/n)? "; then
 
   case $SSH_KEY_TYPE in
   1 | rsa | RSA)
-    success "🔑 Generating SSH keys (RSA)..."
+    success "🔑 Generating SSH keys (RSA, 4096 bits)..."
     ssh-keygen -t rsa -b 4096 -C "${EMAIL}" -f ~/.ssh/id_rsa
     ;;
   2 | ec | ecdsa | ECDSA)
-    success "🔑 Generating SSH keys (ECDSA)..."
+    success "🔑 Generating SSH keys (ECDSA, 521 bits)..."
     ssh-keygen -t ecdsa -b 521 -C "${EMAIL}" -f ~/.ssh/id_ecdsa
     ;;
   3 | ed | ed25519 | ED25519)
-    success "🔑 Generating SSH keys (ED25519)..."
+    success "🔑 Generating SSH keys (ED25519, 256 bits)..."
     ssh-keygen -o -a 256 -t ed25519 -C "${EMAIL}" -f ~/.ssh/id_ed25519
     ;;
   *)
