@@ -387,6 +387,10 @@ if ask "🛡 Do you want to install privacy and security software (y/n)?"; then
     success "🔒 Installing GPG Suite..."
     brew install --cask gpg-suite
   fi
+  if ask "🤖 Do you want to install Cryptomator (y/n)?"; then
+    success "🤖 Installing Cryptomator..."
+    brew install --cask cryptomator
+  fi
   if ask "⚙️ Do you want to install OpenSSH (y/n)?"; then
     success "🔒 Installing OpenSSH..."
     brew install openssh
