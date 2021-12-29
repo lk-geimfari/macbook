@@ -543,6 +543,10 @@ brew cleanup
 if ask "⚙️ Do you want to change the default settings of your OS (y/n)?"; then
   success "💻 Changing macOS's settings..."
 
+  # Avoids appearing your name in local networks and in various preference files
+  sudo scutil --set ComputerName Macbook
+  sudo scutil --set LocalHostName Macbook
+
   # Sleep the display after 15 minutes
   sudo pmset -a displaysleep 10
 
