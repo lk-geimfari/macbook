@@ -443,6 +443,11 @@ if ask "🛠 Do you want to install JetBrain's IDEs (y/n)?"; then
     brew install --cask clion
   fi
 
+  if ask "🛠 Do you want to install RubyMine (y/n)?"; then
+    success "⚙️ Installing RubyMine..."
+    brew install --cask rubymine
+  fi
+
   if ask "🛠 Do you want to install DataGrip (y/n)?"; then
     success "⚙️ Installing DataGrip..."
     brew install --cask datagrip
