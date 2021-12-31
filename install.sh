@@ -70,7 +70,7 @@ if ask "🍺 Do you want to install Homebrew"; then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   brew update
 
-  success "🍺 Installing homebrew cask"
+  success "🍺 Installing homebrew cask..."
   brew install caskroom/cask/brew-cask
 
   success "🍺 Homebrew: tap caskroom/versions..."
@@ -79,7 +79,7 @@ if ask "🍺 Do you want to install Homebrew"; then
   success "🍺 Homebrew: tap homebrew/cask-versions..."
   brew tap homebrew/cask-versions
 
-  if ask "🍺 Do you want to install Cakebrew? (y/n)"; then
+  if ask "🍺 Do you want to install Cakebrew"; then
     brew install --cask cakebrew
   fi
 
@@ -87,6 +87,21 @@ if ask "🍺 Do you want to install Homebrew"; then
 else
   warning "Skipping installation of Homebrew..."
 fi
+
+if ask "Do you want to install command-line interface for App Store"; then
+  success "Installing mas..."
+  brew install mas
+fi
+
+if ask "Do you want to install Xcode"; then
+  success "⚙️ Installing Xcode..."
+  mas install 497799835
+
+  if ask "How about Swift Playground"; then
+    mas install 1496833156
+  fi
+fi
+
 
 if ask "Does your Macbook has notch?"; then
   if ask "Do you want to install TopNotch?"; then
@@ -111,6 +126,16 @@ if ask "Do you want to install web browsers"; then
   fi
 else
   warning "Skipping installation of browsers..."
+fi
+
+if ask "Do you want to install Microsoft To Do"; then
+  success "⚙️ Installing Microsoft To Do..."
+  mas install 1274495053
+fi
+
+if ask "Do you want to install Magnet"; then
+  success "⚙️ Installing Magnet..."
+  mas install 441258766
 fi
 
 if ask "Do you want to install communication apps"; then
