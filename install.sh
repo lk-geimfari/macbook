@@ -565,8 +565,9 @@ if ask "Do you want to change the default settings of your macOS"; then
   success "💻 Changing macOS's settings..."
 
   # Avoids appearing your name in local networks and in various preference files
-  sudo scutil --set ComputerName Macbook
-  sudo scutil --set LocalHostName Macbook
+  sudo scutil --set ComputerName "Macbook"
+  sudo scutil --set HostName "Macbook"
+  sudo scutil --set LocalHostName "Macbook"
 
   # Sleep the display after 15 minutes
   sudo pmset -a displaysleep 10
@@ -601,6 +602,11 @@ if ask "Do you want to change the default settings of your macOS"; then
   defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false
   defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles -bool false
 
+  # Enable the Develop menu and the Web Inspector in Safari
+  defaults write com.apple.Safari IncludeDevelopMenu -bool true
+  defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+  defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+
   # Show the full URL in the address bar (note: this still hides the scheme)
   defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
 
@@ -627,6 +633,9 @@ if ask "Do you want to change the default settings of your macOS"; then
 
   # Show Finder path bar:
   defaults write com.apple.finder ShowPathbar -bool true
+
+  # Show the main window when launching Activity Monitor
+  defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
 
   # Disable autocorrect:
   defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
@@ -682,6 +691,9 @@ if ask "Do you want to change the default settings of your macOS"; then
 
   # Disable the warning before emptying the Trash
   defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+  # Empty Trash securely by default
+  defaults write com.apple.finder EmptyTrashSecurely -bool true
 
   # Avoid creating .DS_Store files on network or USB volumes
   defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
