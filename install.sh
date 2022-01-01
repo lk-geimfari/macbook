@@ -16,8 +16,8 @@ error() {
   echo -e "\e[1;31m$1\e[0m"
 }
 
-read -p "$(success '👤 Enter your name: ')" AUTHOR
-read -p "$(success '📧 Enter your email: ')" EMAIL
+read -p "$(success '👤 Enter your name: ')" USERNAME
+read -p "$(success '📧 Enter your email: ')" USER_EMAIL
 
 ask() {
   while true; do
@@ -39,11 +39,11 @@ else
     case $SSH_KEY_TYPE in
     1 | rsa | RSA)
       success "🔑 Generating SSH keys (RSA with 4096 bits and 150 rounds of KDF)..."
-      ssh-keygen -t rsa -b 4096 -o -a 150 -C "${EMAIL}" -f ~/.ssh/id_rsa
+      ssh-keygen -t rsa -b 4096 -o -a 150 -C "${USER_EMAIL}" -f ~/.ssh/id_rsa
       ;;
     2 | ed | ed25519 | ED25519)
       success "🔑 Generating SSH keys (Ed25519 with 150 rounds of KDF)..."
-      ssh-keygen -t ed25519 -o -a 150 -C "${EMAIL}" -f ~/.ssh/id_ed25519
+      ssh-keygen -t ed25519 -o -a 150 -C "${USER_EMAIL}" -f ~/.ssh/id_ed25519
       ;;
     *)
       warning "Unknown key type. Skipping generation of keys..."
@@ -258,8 +258,8 @@ if ask "Do you want to install Git"; then
 
   if ask "Do you want to configure Git"; then
     success "⚙️ Configuring Git..."
-    git config --global user.name "${AUTHOR}"
-    git config --global user.email "${EMAIL}"
+    git config --global user.name "${USERNAME}"
+    git config --global user.email "${USER_EMAIL}"
   else
     warning "Skipping configuration of git..."
   fi
