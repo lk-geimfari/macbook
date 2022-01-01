@@ -353,7 +353,9 @@ if ask "💡 Do you want to install various programming languages"; then
 
   if ask "🦀 Do you want to install Rust"; then
     success "🦀 Installing Rust..."
-    curl https://sh.rustup.rs -sSf | sh
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    source ~/.cargo/env
+    rustup default stable
     rustup update
     rustc --version
   fi
