@@ -30,24 +30,20 @@ ask() {
   done
 }
 
-if ask "Have you just (literally, just right now) turned on your new Macbook"; then
+if ask "Have you just turned on your new Macbook (literally, just right now)"; then
   warning "You have to use your Macbook for a while to make it produce enough entropy for generating strong random numbers"
 else
   if ask "🔑 Do you want to generate SSH keys"; then
-    read -p "Please, specify the type of key (RSA, ECDSA or ED25519): " SSH_KEY_TYPE
+    read -p "Please, specify the type of key (RSA or ED25519): " SSH_KEY_TYPE
 
     case $SSH_KEY_TYPE in
     1 | rsa | RSA)
-      success "🔑 Generating SSH keys (RSA, 4096 bits)..."
-      ssh-keygen -t rsa -b 4096 -C "${EMAIL}" -f ~/.ssh/id_rsa
+      success "🔑 Generating SSH keys (RSA with 4096 bits and 150 rounds of KDF)..."
+      ssh-keygen -t rsa -b 4096 -o -a 150 -C "${EMAIL}" -f ~/.ssh/id_rsa
       ;;
-    2 | ec | ecdsa | ECDSA)
-      success "🔑 Generating SSH keys (ECDSA, 521 bits)..."
-      ssh-keygen -t ecdsa -b 521 -C "${EMAIL}" -f ~/.ssh/id_ecdsa
-      ;;
-    3 | ed | ed25519 | ED25519)
-      success "🔑 Generating SSH keys (ED25519, 256 bits)..."
-      ssh-keygen -o -a 256 -t ed25519 -C "${EMAIL}" -f ~/.ssh/id_ed25519
+    2 | ed | ed25519 | ED25519)
+      success "🔑 Generating SSH keys (Ed25519 with 150 rounds of KDF)..."
+      ssh-keygen -t ed25519 -o -a 150 -C "${EMAIL}" -f ~/.ssh/id_ed25519
       ;;
     *)
       warning "Unknown key type. Skipping generation of keys..."
