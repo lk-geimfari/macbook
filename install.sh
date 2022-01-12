@@ -54,20 +54,16 @@ else
   fi
 fi
 
-if ask "Do you want to install Xcode command line tools"; then
+if ! command -v xcode-select &>/dev/null; then
   success "⚙️ Installing Xcode command line tools..."
   xcode-select --install
-else
-  warning "Skipping installation of Xcode command line tools..."
+  xcode-select --version
 fi
 
-if ask "🍺 Do you want to install Homebrew"; then
+if ! command -v brew &>/dev/null; then
   success "🍺 Installing homebrew..."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   brew update
-
-  success "🍺 Installing homebrew cask..."
-  brew install caskroom/cask/brew-cask
 
   success "🍺 Homebrew: tap caskroom/versions..."
   brew tap caskroom/versions
@@ -78,10 +74,7 @@ if ask "🍺 Do you want to install Homebrew"; then
   if ask "🍺 Do you want to install Cakebrew"; then
     brew install --cask cakebrew
   fi
-
   brew --version
-else
-  warning "Skipping installation of Homebrew..."
 fi
 
 if ask "Do you want to install command-line interface for App Store"; then
