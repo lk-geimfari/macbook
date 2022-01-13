@@ -439,6 +439,7 @@ if ask "🛡 Do you want to install privacy and security software"; then
   if ask "Do you want to install Tor Browser"; then
     brew install --cask tor-browser
   fi
+
   if ask "🔒 Do you want to install GPG Suite"; then
     success "🔒 Installing GPG Suite..."
     brew install --cask gpg-suite
@@ -526,6 +527,9 @@ if ask "🔬 Do you want to install network/traffic analysis tools"; then
     hping
     telnet
     tcpdump
+    tcpflow
+    tcptrace
+    tcpreplay
     prettyping
   )
 
