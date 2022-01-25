@@ -412,15 +412,11 @@ if ask "💡 Do you want to install various programming languages"; then
     success "☕️️ Installing Java..."
     brew install --cask java
     java --version
-  fi
 
-  if ask "Do you want to install Clojure"; then
-    success "🍺 Homebrew: tap clojure/tools..."
-    brew tap clojure/tools
-    brew update
-
-    success "⚙️ Installing Clojure..."
-    brew install clojure/tools/clojure leiningen
+    if ask "Do you want to install Clojure"; then
+      success "⚙️ Installing Clojure..."
+      brew install clojure/tools/clojure leiningen
+    fi
   fi
 else
   warning "Skipping installation of programming languages..."
@@ -439,10 +435,12 @@ fi
 if ask "Do you want to install fonts"; then
   success "🍺 Homebrew: tap caskroom/fonts..."
   brew tap caskroom/fonts
+  brew tap homebrew/cask-fonts
   brew update
 
   success "⚙️ Installing fonts..."
   fonts=(
+    font-input
     font-hasklig
     font-fira-code
     font-hack-nerd-font
