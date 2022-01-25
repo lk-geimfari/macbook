@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+DEFAULT_HOSTNAME="Macbook"
+
 success() {
   echo -e "\e[1;32m$1\e[0m"
 }
@@ -15,8 +17,6 @@ warning() {
 error() {
   echo -e "\e[1;31m$1\e[0m"
 }
-
-DEFAULT_HOSTNAME="Macbook"
 
 read -e -p "$(success '💻 Enter host name: ')" -i "${DEFAULT_HOSTNAME}" HOSTNAME
 read -e -p "$(success '💻 Enter computer name: ')" -i "${DEFAULT_HOSTNAME}" COMPUTER_NAME
@@ -41,7 +41,7 @@ if ask "Have you just turned on your new Macbook (literally, just right now)"; t
   warning "You have to use your Macbook for a while to make it produce enough entropy for generating strong random numbers"
 else
   if ask "🔑 Do you want to generate SSH keys"; then
-    read -e -p "Please, specify the type of key (RSA or ED25519): " SSH_KEY_TYPE
+    read -e -p "Please, specify the type of key (RSA or ED25519): " -i "RSA" SSH_KEY_TYPE
 
     case $SSH_KEY_TYPE in
     1 | rsa | RSA)
