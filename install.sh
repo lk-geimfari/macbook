@@ -16,8 +16,15 @@ error() {
   echo -e "\e[1;31m$1\e[0m"
 }
 
-read -p "$(success '👤 Enter your name: ')" USERNAME
-read -p "$(success '📧 Enter your email: ')" USER_EMAIL
+DEFAULT_HOSTNAME="Macbook"
+
+read -e -p "$(success '💻 Enter host name: ')" -i "${DEFAULT_HOSTNAME}" HOSTNAME
+read -e -p "$(success '💻 Enter computer name: ')" -i "${DEFAULT_HOSTNAME}" COMPUTER_NAME
+read -e -p "$(success '💻 Enter local host name: ')" -i "${DEFAULT_HOSTNAME}" LOCAL_HOSTNAME
+
+read -e -p "$(success '📧 Enter your email: ')" USER_EMAIL
+read -e -p "$(success '👤 Enter your nickname: ')" USERNAME
+read -e -p "$(success '👤 Enter your full name: ')" FULL_NAME
 
 ask() {
   while true; do
@@ -34,7 +41,7 @@ if ask "Have you just turned on your new Macbook (literally, just right now)"; t
   warning "You have to use your Macbook for a while to make it produce enough entropy for generating strong random numbers"
 else
   if ask "🔑 Do you want to generate SSH keys"; then
-    read -p "Please, specify the type of key (RSA or ED25519): " SSH_KEY_TYPE
+    read -e -p "Please, specify the type of key (RSA or ED25519): " SSH_KEY_TYPE
 
     case $SSH_KEY_TYPE in
     1 | rsa | RSA)
@@ -250,12 +257,12 @@ if ask "Do you want to install Git"; then
 
   if ask "Do you want to configure Git"; then
     success "⚙️ Configuring Git..."
-    git config --global user.name "${USERNAME}"
+    git config --global user.name "${USER_EMAIL}"
     git config --global user.email "${USER_EMAIL}"
 
     if ask "How about GPG signing of commits"; then
       git config --global commit.gpgsign true
-      read -p "$(success 'Enter your fingerprint: ')" GPG_FINGERPRINT
+      read -e -p "$(success 'Enter your fingerprint: ')" GPG_FINGERPRINT
       git config --global user.signingkey "${GPG_FINGERPRINT}"
     fi
   fi
@@ -607,9 +614,9 @@ if ask "Do you want to change the default settings of your macOS"; then
   success "💻 Changing macOS's settings..."
 
   # Avoids appearing your name in local networks and in various preference files
-  sudo scutil --set ComputerName "Macbook"
-  sudo scutil --set HostName "Macbook"
-  sudo scutil --set LocalHostName "Macbook"
+  sudo scutil --set ComputerName "${COMPUTER_NAME}"
+  sudo scutil --set HostName "${HOSTNAME}"
+  sudo scutil --set LocalHostName "${LOCAL_HOSTNAME}"
 
   # Sleep the display after 15 minutes
   sudo pmset -a displaysleep 10
