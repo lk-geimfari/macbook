@@ -41,7 +41,7 @@ if ask "Have you just turned on your new Macbook (literally, just right now)"; t
   warning "You have to use your Macbook for a while to make it produce enough entropy for generating strong random numbers"
 else
   if ask "🔑 Do you want to generate SSH keys"; then
-    read -e -p "Please, specify the type of key (RSA or ED25519): " -i "RSA" SSH_KEY_TYPE
+    read -e -p "$(success 'Please, specify the type of key (RSA or ED25519): ')" -i "RSA" SSH_KEY_TYPE
 
     case $SSH_KEY_TYPE in
     1 | rsa | RSA)
@@ -262,8 +262,18 @@ if ask "Do you want to install Git"; then
 
     if ask "How about GPG signing of commits"; then
       git config --global commit.gpgsign true
-      read -e -p "$(success 'Enter your fingerprint: ')" GPG_FINGERPRINT
-      git config --global user.signingkey "${GPG_FINGERPRINT}"
+      read -e -p "$(success 'Enter your GPG fingerprint: ')" GPG_FINGERPRINT
+      read -e -p "$(success 'Confirm your GPG fingerprint: ')" GPG_FINGERPRINT_CONFIRMATION
+
+      if [[ $GPG_FINGERPRINT ]]; then
+        if [[ "${GPG_FINGERPRINT}" == "${GPG_FINGERPRINT_CONFIRMATION}" ]]; then
+          git config --global user.signingkey "${GPG_FINGERPRINT}"
+        else
+          error "GPG fingerprints do not match. Skipping..."
+        fi
+      else
+        warning "Configuring GPG signing for Git has been skipped..."
+      fi
     fi
   fi
 
