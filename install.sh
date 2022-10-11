@@ -626,7 +626,7 @@ if ask "Do you want to change the default settings of your macOS"; then
   sudo scutil --set HostName "${HOSTNAME}"
   sudo scutil --set LocalHostName "${LOCAL_HOSTNAME}"
 
-  # Sleep the display after 15 minutes
+  # Sleep the display after 10 minutes
   sudo pmset -a displaysleep 10
 
   # Disable machine sleep while charging
