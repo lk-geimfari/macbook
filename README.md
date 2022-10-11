@@ -33,7 +33,3 @@ bash <(curl https://raw.githubusercontent.com/lk-geimfari/macbook/exec/install.s
 ```
 
 `exec` is a stable branch which means it can be outdated in comparison with a `master`.
-
-## License
-
-Mimesis is licensed under the MIT License. See [LICENSE](LICENSE) for more information.
