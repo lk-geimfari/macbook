@@ -88,15 +88,6 @@ if ask "Do you want to install command-line interface for App Store"; then
   success "Installing mas..."
   brew install mas
 
-  if ask "Do you want to install Xcode"; then
-    success "⚙️ Installing Xcode..."
-    mas install 497799835
-
-    if ask "How about Swift Playground"; then
-      mas install 1496833156
-    fi
-  fi
-
   if ask "Do you want to install Microsoft To Do"; then
     success "⚙️ Installing Microsoft To Do..."
     mas install 1274495053
@@ -150,6 +141,10 @@ if ask "Do you want to install communication apps"; then
     success "⚙️ Installing Discord..."
     brew install --cask discord
   fi
+  if ask "Do you want to install Signal"; then
+    success "⚙️ Installing Signal..."
+    brew install --cask signal
+  fi
 fi
 
 if ask "Do you want to install iTerm2"; then
@@ -175,20 +170,9 @@ if ask "Do you want to install Spotify"; then
   brew install --cask spotify
 fi
 
-if ask "Do you want to install cloud utils"; then
-  if ask "Do you want to install Dropbox"; then
-    success "☁️ Installing Dropbox..."
-    brew install --cask dropbox
-  fi
-  if ask "Do you want to install Cyberduck"; then
-    success "🦆 Installing Cyberduck..."
-    brew install --cask cyberduck
-  fi
-fi
-
-if ask "Do you want to install VirtualBox"; then
-  success "📦 Installing VirtualBox..."
-  brew install --cask virtualbox
+if ask "Do you want to install Dropbox"; then
+  success "☁️ Installing Dropbox..."
+  brew install --cask dropbox
 fi
 
 if ask "Do you want to install Dash"; then
@@ -199,25 +183,6 @@ fi
 if ask "Do you want to install Visual Studio Code"; then
   success "⚙️ Installing Visual Studio Code..."
   brew install --cask visual-studio-code
-
-  if command -v code &>/dev/null; then
-    if ask "Do you want to install extensions for your VS Code"; then
-      if ask "[VS Code] Do you want to install extensions for programming languages"; then
-        if ask "[VS Code] Do you want to install Python"; then
-          code --install-extension ms-python.python
-          code --install-extension dongli.python-preview
-          code --install-extension ms-python.vscode-pylance
-          code --install-extension batisteo.vscode-django
-        fi
-
-        if ask "[VS Code] Do you want to install Clojure"; then
-          code --install-extension vscjava.vscode-java-dependency
-          code --install-extension avli.clojure
-        fi
-      fi
-    fi
-  fi
-
 fi
 
 if ask "Do you want to install DB management tools"; then
@@ -225,22 +190,8 @@ if ask "Do you want to install DB management tools"; then
     success "⚙️ Installing DB Browser for SQLite"
     brew install --cask db-browser-for-sqlite
   fi
-
-  if ask "Do you want to install DBeaver Community"; then
-    success "⚙️ Installing DBeaver Community..."
-    brew install --cask dbeaver-community
-  fi
-
-  if ask "🐝 Do you want to install Beekeeper Studio"; then
-    success "🐝 Installing Beekeeper Studio..."
-    brew install --cask beekeeper-studio
-  fi
 fi
 
-if ask "Do you want to install Ganache"; then
-  success "⚙️ Installing Ganache..."
-  brew install --cask ganache
-fi
 
 if ask "Do you want to install Git"; then
   success "⚙️ Installing Git..."
@@ -269,7 +220,7 @@ if ask "Do you want to install Git"; then
         if [[ "${GPG_FINGERPRINT}" == "${GPG_FINGERPRINT_CONFIRMATION}" ]]; then
           git config --global user.signingkey "${GPG_FINGERPRINT}"
         else
-          error "GPG fingerprints do not match. Skipping..."
+          error "GPG fingerprints does not match. Skipping..."
         fi
       else
         warning "Configuring GPG signing for Git has been skipped..."
@@ -378,7 +329,7 @@ fi
 if ask "💡 Do you want to install various programming languages"; then
   if ask "🐍 Do you want to install Python 3"; then
     success "🐍 Installing Python..."
-    brew install python@3.9 ipython pyenv
+    brew install python@3.10 ipython pyenv
     python --version
     pyenv --version
   fi
@@ -470,22 +421,6 @@ if ask "🛡 Do you want to install privacy and security software"; then
   if ask "Do you want to install 1Password"; then
     success "⚙️ Installing 1Password..."
     brew install --cask 1password
-  fi
-  if ask "Do you want to install Authy"; then
-    success "⚙️ Installing Authy..."
-    brew install --cask authy
-  fi
-  if ask "🐻 Do you want to install TunnelBear"; then
-    success "🐻 Installing TunnelBear..."
-    brew install --cask tunnelbear
-  fi
-  if ask "Do you want to install NordVPN"; then
-    success "⚙️ Installing NordVPN..."
-    brew install --cask nordvpn
-  fi
-  if ask "☁️ Do you want to install CloudFlare Warp"; then
-    success "☁️ Installing CloudFlare Warp..."
-    brew install --cask cloudflare-warp
   fi
 else
   warning "Skipping installation of privacy and security software..."
