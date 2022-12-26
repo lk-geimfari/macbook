@@ -110,6 +110,9 @@ if ask "Does your Macbook has notch?"; then
   fi
 fi
 
+# Install MonitorControl
+brew install --cask monitorcontrol
+
 if ask "Do you want to install web browsers"; then
   if ask "Do you want to install Mozilla Firefox"; then
     success "🦊 Installing Mozilla Firefox..."
