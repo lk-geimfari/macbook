@@ -1,12 +1,5 @@
 ## Macbook: Development Environment Quickly
 
-
-<p align="center">
-  <a target="_blank" href="https://github.com/lk-geimfari/macbook">
-  <img src="https://raw.githubusercontent.com/lk-geimfari/macbook/master/media/macbook-no-title.jpeg" width="900"/>
-  </a>
-</p>
-
 A script for quickly setting up a development environment on the new Macbook. The script installs programming languages, IDEs, GNU software collections, and so on.
 
 
