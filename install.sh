@@ -110,8 +110,9 @@ if ask "Does your Macbook has notch?"; then
   fi
 fi
 
-# Install MonitorControl
-brew install --cask monitorcontrol
+if ask "Do you have external display?"; then
+  brew install --cask monitorcontrol
+fi
 
 if ask "Do you want to install web browsers"; then
   if ask "Do you want to install Mozilla Firefox"; then
@@ -135,10 +136,6 @@ if ask "Do you want to install communication apps"; then
   if ask "Do you want to install Telegram"; then
     success "⚙️ Installing Telegram..."
     brew install --cask telegram
-  fi
-  if ask "Do you want to install Zoom"; then
-    success "⚙️ Installing Zoom..."
-    brew install --cask zoom
   fi
   if ask "Do you want to install Discord"; then
     success "⚙️ Installing Discord..."
@@ -495,11 +492,6 @@ if ask "🔬 Do you want to install network/traffic analysis tools"; then
     success "⚙️ Installing Wireshark..."
     brew install --cask wireshark
   fi
-
-  if ask "Do you want to install Angry IP Scanner"; then
-    success "⚙️ Installing Angry IP Scanner..."
-    brew install --cask angry-ip-scanner
-  fi
 fi
 
 if ask "🛠 Do you want to install toolset for frontend development"; then
@@ -559,18 +551,18 @@ brew cleanup
 if ask "Do you want to change the default settings of your macOS"; then
   success "💻 Changing macOS's settings..."
 
-  # Avoids appearing your name in local networks and in various preference files
+  success "Avoid appearing your name in local networks and in various preference files..."
   sudo scutil --set ComputerName "${COMPUTER_NAME}"
   sudo scutil --set HostName "${HOSTNAME}"
   sudo scutil --set LocalHostName "${LOCAL_HOSTNAME}"
 
-  # Sleep the display after 10 minutes
+  success "Sleep the display after 10 minutes..."
   sudo pmset -a displaysleep 10
 
-  # Disable machine sleep while charging
+  success "Disable machine sleep while charging..."
   sudo pmset -c sleep 0
 
-  # Set machine sleep to 5 minutes on battery
+  success "Set machine sleep to 5 minutes on battery..."
   sudo pmset -b sleep 5
 
   # Disable shit I hate.
@@ -579,12 +571,13 @@ if ask "Do you want to change the default settings of your macOS"; then
   # This line deactivates rubber scrolling:
   defaults write -g NSScrollViewRubberbanding -int 0
 
-  # Scrollbars visible when scrolling:
+  success "Scrollbars visible when scrolling"
   defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 
-  # Maximize windows on double clicking them:
+  success "Maximize windows on double clicking them"
   defaults write -g AppleActionOnDoubleClick 'Maximize'
 
+  success "🕵️‍♀️Improving privacy..."
   # Require password immediately after sleep or screen saver begins
   defaults write com.apple.screensaver askForPassword -int 1
   defaults write com.apple.screensaver askForPasswordDelay -int 0
@@ -597,6 +590,7 @@ if ask "Do you want to change the default settings of your macOS"; then
   defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false
   defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles -bool false
 
+  success "Improving stuff..."
   # Enable the Develop menu and the Web Inspector in Safari
   defaults write com.apple.Safari IncludeDevelopMenu -bool true
   defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
