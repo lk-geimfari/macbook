@@ -257,7 +257,7 @@ if ask "Do you want to install Git"; then
 
   if ask "Do you want to configure Git"; then
     success "⚙️ Configuring Git..."
-    git config --global user.name "${USER_EMAIL}"
+    git config --global user.name "${USERNAME}"
     git config --global user.email "${USER_EMAIL}"
 
     if ask "How about GPG signing of commits"; then
